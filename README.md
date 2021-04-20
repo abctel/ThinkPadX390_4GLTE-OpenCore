@@ -1,4 +1,3 @@
-# ThinkPadX390_4GLTE-OpenCore-Hackintosh
 OpenCore For X390 4G LTE
 
 <div align="center">
@@ -15,7 +14,7 @@ OpenCore For X390 4G LTE
 - [ThinkPad X390 Hackintosh](#ThinkPadX390_4GLTE-OpenCore-Hackintosh)
   - [测试过的系统](#测试过的系统)
 - [设备](#设备)
-- [DSDT说明](#DSDT)
+- [安装及DSDT说明](#安装及DSDT说明)
 - [正常工作的部分](#正常工作的部分)
   - [详细的设备驱动情况](#详细的设备驱动情况)
 - [已知的问题](#已知的问题)
@@ -29,8 +28,9 @@ OpenCore For X390 4G LTE
 
 **这包括一个EFI(Opencore)，它在Thinkpad-X390-4GLTE上工作完美**
 
-我比较懒，所以借用了作者 ** [@mendax1234] (https://github.com/mendax1234/)** 的说明文档，并基于原作者的引导文件进行了一些改进。
+我比较懒，所以借用了作者 **[@mendax1234](https://github.com/mendax1234/)** 的说明文档，并基于原作者的引导文件进行了一些改进。
 改进内容：
+
 1. 优化了config.plus部分设置，目前使用体验感觉比较完美。
 2. 电源管理使用的 SMCBatteryManager.kext （就单纯觉得名字好看而已）
 3. 所有kext部分全部更新到最新版本。
@@ -43,7 +43,7 @@ OpenCore For X390 4G LTE
 
 ## 下载
 
-git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
+git clone <https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git>
 
 ## 声明
 
@@ -56,6 +56,7 @@ git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
 ### 测试过的系统
 
 **Catalina**
+
 - 10.15.2
 - 10.15.3
 - 10.15.4
@@ -64,6 +65,7 @@ git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
 - 10.15.7
 
 **Big Sur**
+
 - 11.0.1
 - 11.1
 - 11.2
@@ -85,10 +87,16 @@ git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
 | Ethernet |  Intel(R) Ethernet Connection (6) I219-V |
 | Sound Card | Realtek High Defination Audio@Intel Intel Smart Sound Technology Audio Controller (layoutid:11) |
 | Wireless Card |  Intel(R) Wireless-AC 9560 160MHz |
-| LTE 4G | 
+| LTE 4G | |
 
-## DSDT
+## 安装及DSDT说明
+
+如果使用该引导无法引导或卡代码，删除ACPI下的DSDT.aml文件即可进行引导安装或启动。
+
+启动后按照以下流程制作你自己电脑的DSDT.aml文件即可。
+
 DSDT流程（这是我的制作方式，仅供参考）
+
 1. 通过 Clover 一件提取 DSDT 文件。
 2. 使用新版的 DSDT编辑工具 对 DSDT 除错。（我记得就一个错误，直接删除错误内容就可以了，其它的警告不用管）
 3. 使用 Bat_DSDT_Patch.txt 的补丁内容对 DSDT 文件修复电池，理论上涵盖 X390 所有版本，在补丁制作时涵盖了我自己使用的X390所有超8位的字段，即使无需拆分的字段。
@@ -113,7 +121,7 @@ DSDT流程（这是我的制作方式，仅供参考）
 
 #### 显卡
 
-集成显卡的型号是`Intel UHD Graphics 620`，仿冒`Intel UHD Graphics 630 (Mobile) `
+集成显卡的型号是`Intel UHD Graphics 620`，仿冒`Intel UHD Graphics 630 (Mobile)`
 TYPE-C 与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K@30Hz` 。
 
 #### 声卡
@@ -144,10 +152,10 @@ NVMe 功能正常并且开启了TRIM.
 
 已使用正确的USBInjectAll.kext完美驱动，功能正常。
 
-
 ## 已知的问题
 
 - 隔空投送和接力无法正常工作
+- 4GLTE 网卡 无法驱动。
 
 ## 推荐的BIOS配置
 
@@ -172,15 +180,19 @@ NVMe 功能正常并且开启了TRIM.
 > 同样的原因。您应该在并行桌面中手动关闭Windows，然后重新启动macOS(先关闭再启动)。
 
 ## 更多帮助
-  - 如需了解更多，请移步原作者的交流贴 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html) & [CSDN](https://blog.csdn.net/weixin_45498173/article/details/113092016)
+
+- 如需了解更多，请移步原作者的交流贴 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html) & [CSDN](https://blog.csdn.net/weixin_45498173/article/details/113092016)
 
 ## 疑问
-  - 如果你有任何问题，尽管在Github上提出来，我会尽量帮助你!
-  - 我们只接受在GitHub issues的bug报告.
+
+- 如果你有任何问题，尽管在Github上提出来，我会尽量帮助你!
+- 我们只接受在GitHub issues的bug报告.
   
 ## 鸣谢
-  - [Apple](https://www.apple.com) for [macOS](https://www.apple.com/macos)
-  - [@zxystd](https://github.com/zxystd) for developing [itlwm](https://github.com/OpenIntelWireless/itlwm)
-  - [@Acidanthera](https://github.com/acidanthera) for basic kexts.
-  - [@BAndysc](https://github.com/BAndysc) for [Trackpoint and UltraNavs drive](https://github.com/BAndysc/VoodooPS2/tree/master)
-  - [@SukkaW](https://github.com/SukkaW) for [Text and Templates](https://github.com/SukkaW/ThinkPad-E480-Hackintosh)
+
+- [@mendax1234](https://github.com/mendax1234/) for [ThinkpadX390-Opencore-EFI](https://github.com/mendax1234/ThinkpadX390-Opencore-EFI/)
+- [Apple](https://www.apple.com) for [macOS](https://www.apple.com/macos)
+- [@zxystd](https://github.com/zxystd) for developing [itlwm](https://github.com/OpenIntelWireless/itlwm)
+- [@Acidanthera](https://github.com/acidanthera) for basic kexts.
+- [@BAndysc](https://github.com/BAndysc) for [Trackpoint and UltraNavs drive](https://github.com/BAndysc/VoodooPS2/tree/master)
+- [@SukkaW](https://github.com/SukkaW) for [Text and Templates](https://github.com/SukkaW/ThinkPad-E480-Hackintosh)
