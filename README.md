@@ -1,8 +1,5 @@
-# ThinkPadX390_4GLTE-OpenCore
+# ThinkPadX390_4GLTE-OpenCore-Hackintosh
 OpenCore For X390 4G LTE
-[![Download from https://github.com/mendax955/ThinkpadX390-Opencore-EFI/releases](https://img.shields.io/github/downloads/mendax955/ThinkpadX390-Opencore-EFI/total?label=Download)](https://github.com/mendax955/ThinkpadX390-Opencore-EFI/releases) [![Gitter](https://badges.gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad.svg)](https://gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![GitHub issues](https://img.shields.io/github/issues-raw/mendax1234/ThinkpadX390-Opencore-EFI?label=Open%20issues)](https://github.com/mendax1234/ThinkpadX390-Opencore-EFI/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/mendax1234/ThinkpadX390-Opencore-EFI?label=Pull%20requests)](https://github.com/mendax1234/ThinkpadX390-Opencore-EFI/pulls)
-
-[使用说明](https://github.com/mendax1234/Pi-introduction)
 
 <div align="center">
 <img src="https://img14.360buyimg.com/n0/jfs/t1/122699/10/10858/75075/5f4708e1Eb80b55c6/f276218d450b6840.jpg" width="350px">
@@ -29,17 +26,29 @@ OpenCore For X390 4G LTE
 
 ## 介绍
 
-**这包括一个EFl(Opencore)，它在Thinkpad-X390上工作完美**
+**这包括一个EFI(Opencore)，它在Thinkpad-X390-4GLTE上工作完美**
+
+我比较懒，所以借用了作者 ** [@mendax1234] (https://github.com/mendax1234/)** 的说明文档，并基于原作者的引导文件进行了一些改进。
+改进内容：
+1. 优化了config.plus部分设置，目前使用体验感觉比较完美。
+2. 电源管理使用的 SMCBatteryManager.kext （就单纯觉得名字好看而已）
+3. 所有kext部分全部更新到最新版本。
+4. ACPI替换了部分通用SSDT-*.aml文件。
+5. 添加了ThinkPad_ClickPad的aml文件，优化小红点和触控的使用体验，但不确定是不是负优化，欢迎你提供使用反馈。 （感谢黑果小兵的分享）
+6. 添加了OC的原生苹果主题资源，并默认设置为无选项 duang 声后开机。
+7. 添加了PCI设备信息，现在可以在设备管理里查看到PCI硬件的信息了。
+8. 键盘快捷键通过SSDT驱动，不用DSDT打补丁了。
+9. OC升级到0.6.7了，目前我在用0.6.8再测试两天就更新上来，暂时使用体验与0.6.7无差别。
 
 ## 下载
 
-**你可以按下此按钮 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/mendax1234/ThinkpadX390-Opencore-EFI)](https://github.com/mendax955/ThinkpadX390-Opencore-EFI/releases) 或者转到"Releases"界面去下载最新版本的EFI**
+git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
 
 ## 声明
 
 你的保修单现在无效了。如果你有任何顾虑，请在我的 EFI 取代你的 EFl 之前做一些研究。我不负责任何损失，包括但不限于内核恐慌，设备无法启动或不能正常工作，存储损坏或数据丢失，原子弹爆炸，第三次世界大战，谷歌和苹果都倒闭，等等
 
-## ThinkPad-X390-Hackintosh
+## ThinkPadX390_4GLTE-OpenCore-Hackintosh
 
 可以完美地在ThinkPad X390上安装*Catalina/Big Sur*或者任何之前的版本，如*Mojave , High Sierra , Sierra , EI Captain , Yosemite , Mavericks ……*
 
@@ -70,11 +79,12 @@ OpenCore For X390 4G LTE
 | Mainboard |  Lenevo 20Q00039CD（I/O - 9D84 for mobile 8th Gen Intel Core processor family） |
 | Displayer | Lenevo LEN4094 ( 13.3 inch  ) |
 | Memory | DDR4 2667 Mhz. Onboard 8 GB |
-| NVMe SSD | WDC PC SN730 SDBQNTY-256G-1001 (256G/SSD) |
+| NVMe SSD | WDC PC SN720 SDBQNTY-500G-1001 (500G/SSD) |
 | Integrated Graphics | Intel UHD Graphics 620 |
 | Ethernet |  Intel(R) Ethernet Connection (6) I219-V |
 | Sound Card | Realtek High Defination Audio@Intel Intel Smart Sound Technology Audio Controller (layoutid:11) |
 | Wireless Card |  Intel(R) Wireless-AC 9560 160MHz |
+| LTE 4G | 
 
 
 ## 正常工作的部分
@@ -96,7 +106,7 @@ OpenCore For X390 4G LTE
 #### 显卡
 
 集成显卡的型号是`Intel UHD Graphics 620`，仿冒`Intel UHD Graphics 630 (Mobile) `
-HDMI与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K@30Hz` 。
+TYPE-C 与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K@30Hz` 。
 
 #### 声卡
 
@@ -159,7 +169,7 @@ NVMe 功能正常并且开启了TRIM.
 ## 疑问
   - 如果你有任何问题，尽管在Github上提出来，也许我会帮助你!
   - 或者你有其他别的问题，欢迎在[![Gitter](https://badges.gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad.svg)](https://gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)上提出！
-  - 我们只接受在GitHub issues的bug报告，在打开一个issue之前，建议您在[Gitter](https://gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad?utm_source=share-link&utm_medium=link&utm_campaign=share-link)上与我们重新确认它
+  - 我们只接受在GitHub issues的bug报告.
   
 ## 鸣谢
   - [Apple](https://www.apple.com) for [macOS](https://www.apple.com/macos)
