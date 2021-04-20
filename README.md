@@ -12,9 +12,10 @@ OpenCore For X390 4G LTE
 - [介绍](#介绍)
 - [下载](#下载)
 - [声明](#声明)
-- [ThinkPad X390 Hackintosh](#ThinkPad-X390-Hackintosh)
+- [ThinkPad X390 Hackintosh](#ThinkPadX390_4GLTE-OpenCore-Hackintosh)
   - [测试过的系统](#测试过的系统)
 - [设备](#设备)
+- [DSDT说明](#DSDT)
 - [正常工作的部分](#正常工作的部分)
   - [详细的设备驱动情况](#详细的设备驱动情况)
 - [已知的问题](#已知的问题)
@@ -86,6 +87,13 @@ git clone https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git
 | Wireless Card |  Intel(R) Wireless-AC 9560 160MHz |
 | LTE 4G | 
 
+## DSDT
+DSDT流程（这是我的制作方式，仅供参考）
+1. 通过 Clover 一件提取 DSDT 文件。
+2. 使用新版的 DSDT编辑工具 对 DSDT 除错。（我记得就一个错误，直接删除错误内容就可以了，其它的警告不用管）
+3. 使用 Bat_DSDT_Patch.txt 的补丁内容对 DSDT 文件修复电池，理论上涵盖 X390 所有版本，在补丁制作时涵盖了我自己使用的X390所有超8位的字段，即使无需拆分的字段。
+
+我的DSDT只涵盖了电池补丁，无其它补丁，其它功能的修复尽量放到SSDT中作为通用补丁了。
 
 ## 正常工作的部分
 
@@ -164,11 +172,10 @@ NVMe 功能正常并且开启了TRIM.
 > 同样的原因。您应该在并行桌面中手动关闭Windows，然后重新启动macOS(先关闭再启动)。
 
 ## 更多帮助
-  - 如需了解更多，请移步 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html) & [CSDN](https://blog.csdn.net/weixin_45498173/article/details/113092016)
+  - 如需了解更多，请移步原作者的交流贴 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html) & [CSDN](https://blog.csdn.net/weixin_45498173/article/details/113092016)
 
 ## 疑问
-  - 如果你有任何问题，尽管在Github上提出来，也许我会帮助你!
-  - 或者你有其他别的问题，欢迎在[![Gitter](https://badges.gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad.svg)](https://gitter.im/ThinkpadX390-Opencore-EFI/Hackintosh-ThinkPad?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)上提出！
+  - 如果你有任何问题，尽管在Github上提出来，我会尽量帮助你!
   - 我们只接受在GitHub issues的bug报告.
   
 ## 鸣谢
