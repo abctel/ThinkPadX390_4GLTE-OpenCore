@@ -1,6 +1,4 @@
-Test
-
-OpenCore For X390 4G LTE
+OpenCore For X390 4G LTE OC 0.8.0
 
 <div align="center">
 <img src="https://img14.360buyimg.com/n0/jfs/t1/122699/10/10858/75075/5f4708e1Eb80b55c6/f276218d450b6840.jpg" width="350px">
@@ -30,18 +28,16 @@ OpenCore For X390 4G LTE
 
 **这包括一个EFI(Opencore)，它在Thinkpad-X390-4GLTE上工作完美**
 
-我比较懒，所以借用了作者 **[@mendax1234](https://github.com/mendax1234/)** 的说明文档，并基于原作者的引导文件进行了一些改进。
-改进内容：
 
 1. 优化了config.plus部分设置，目前使用体验感觉比较完美。
-2. 电源管理使用的 SMCBatteryManager.kext （就单纯觉得名字好看而已）
+2. 电源管理使用的 SMCBatteryManager.kext 
 3. 所有kext部分全部更新到最新版本。
 4. ACPI替换了部分通用SSDT-*.aml文件。
-5. 添加了ThinkPad_ClickPad的aml文件，优化小红点和触控的使用体验，但不确定是不是负优化，欢迎你提供使用反馈。 （感谢黑果小兵的分享）
+5. 添加了ThinkPad_ClickPad的aml文件，优化小红点和触控的使用体验，但不确定是不是负优化，欢迎你提供使用反馈。
 6. 添加了OC的原生苹果主题资源，并默认设置为无选项 duang 声后开机。
 7. 添加了PCI设备信息，现在可以在设备管理里查看到PCI硬件的信息了。
 8. 键盘快捷键通过SSDT驱动，不用DSDT打补丁了。
-9. OC升级到0.6.7了，目前我在用0.6.8再测试两天就更新上来，暂时使用体验与0.6.7无差别。
+9. OC升级到0.8.0了。
 
 ## 下载
 
@@ -57,8 +53,14 @@ git clone <https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git>
 
 ### 测试过的系统
 
+**Monterey**
+
+- 12.0.0
+- 12.3.1
+
 **Catalina**
 
+(以下版本如无法正常引导使用请切换到10.15.7分支下载)
 - 10.15.2
 - 10.15.3
 - 10.15.4
@@ -93,17 +95,7 @@ git clone <https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git>
 
 ## 安装及DSDT说明
 
-如果使用该引导无法引导或卡代码，删除ACPI下的DSDT.aml文件即可进行引导安装或启动。
-
-启动后按照以下流程制作你自己电脑的DSDT.aml文件即可。
-
-DSDT流程（这是我的制作方式，仅供参考）
-
-1. 通过 Clover 一件提取 DSDT 文件。
-2. 使用新版的 DSDT编辑工具 对 DSDT 除错。（我记得就一个错误，直接删除错误内容就可以了，其它的警告不用管）
-3. 使用 Bat_DSDT_Patch.txt 的补丁内容对 DSDT 文件修复电池，理论上涵盖 X390 所有版本，在补丁制作时涵盖了我自己使用的X390所有超8位的字段，即使无需拆分的字段。
-
-我的DSDT只涵盖了电池补丁，无其它补丁，其它功能的修复尽量放到SSDT中作为通用补丁了。
+从这个版本起，取消dsdt，所有补丁基于HotPatch进行修补，这样适用型可能更广，基本上8th CPU的笔记本都可以一试，尤其是ThinkPad系列的。
 
 ## 正常工作的部分
 
@@ -115,16 +107,16 @@ DSDT流程（这是我的制作方式，仅供参考）
 
 #### 电池
 
-电池电量显示正常。
+电池电量显示正常。（未测试睡眠时拔下充电器，电池是否准确，欢迎测试反馈）
 
 #### 以太网
 
-功能正常。
+功能正常。（需要一个Dock）
 
 #### 显卡
 
 集成显卡的型号是`Intel UHD Graphics 620`，仿冒`Intel UHD Graphics 630 (Mobile)`
-TYPE-C 与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K@30Hz` 。
+TYPE-C 与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K@30Hz` 。（可能正常，代码使用的是上个版本的，最近抽空测试一下）
 
 #### 声卡
 
@@ -132,7 +124,7 @@ TYPE-C 与`Intel UHD Graphics 620` 连接，功能正常。支持`2K@60Hz` & `4K
 
 #### 键盘
 
-功能正常，除了 <kbd>Insert</kbd>，Magic Keyboard上没有。<kbd>Alt</kbd> 表示Windows上的<kbd>Ctrl</kbd>。
+功能正常，
 
 #### 硬盘
 
@@ -140,7 +132,7 @@ NVMe 功能正常并且开启了TRIM.
 
 #### 蓝牙
 
-功能正常。
+功能正常。（不过intel网卡的蓝牙使用体验很一般啊，确实没有免驱的好用）
 
 #### 触控板和小红点
 
@@ -148,11 +140,33 @@ NVMe 功能正常并且开启了TRIM.
 
 #### 无线网卡
 
-功能部分正常.**感谢  [@zxystd's AirportItlwm](https://github.com/OpenIntelWireless/itlwm)**
+2.4G,5G功能部分正常.**感谢  [@zxystd's AirportItlwm](https://github.com/OpenIntelWireless/itlwm)**
 
 #### 内置摄像头
 
-已使用正确的USBInjectAll.kext完美驱动，功能正常。
+通过USB内建成功，FaceTime和ipad测试使用正常。
+
+#### 睡眠
+
+睡眠完美支持。
+
+#### Type-C
+
+两个Type-C接口使用正常，雷电功能因没有设备，所以未测试。
+
+#### 睡眠LED灯光
+
+电源键和小红点呼吸灯可根据睡眠情况自动切换呼吸、常量模式。
+
+#### 快捷键
+
+- 睡眠快捷键正常（默认fn+4，因技术不精，还没搞明白如何调整为fn+F12对应键盘图标）
+- 背光控制正常
+- 音量控制正常
+
+#### 背光状态
+
+背光状态记录正常，睡眠前，唤醒后亮度保持一致。
 
 ## 已知的问题
 
@@ -170,10 +184,6 @@ NVMe 功能正常并且开启了TRIM.
 
 ## 补充
 
-### 睡眠
-
-睡眠完美支持。
-
 ### 声卡方面的疑问解答
 
 如果你在从Windows启动到macOS后遇到了一些奇怪的问题(比如找不到音频设备)，你应该重启回到Windows，并进行冷重启(先关机再启动)回到macOS。在那之后你的音频设备应该回来了。
@@ -181,9 +191,11 @@ NVMe 功能正常并且开启了TRIM.
 > 如果你在你的Hacintosh上使用带有Boot Camp模式的并行桌面，你不应该在macOS中直接重启
 > 同样的原因。您应该在并行桌面中手动关闭Windows，然后重新启动macOS(先关闭再启动)。
 
+注意⚠️：目前作者单MacOS系统使用中，这是上个版本遇到的问题和解决方法，请参考使用。
+
 ## 更多帮助
 
-- 如需了解更多，请移步原作者的交流贴 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html) & [CSDN](https://blog.csdn.net/weixin_45498173/article/details/113092016)
+- 如需了解更多，请移步原作者的交流贴 [远景论坛]( http://bbs.pcbeta.com/viewthread-1852139-1-1.html)
 
 ## 疑问
 
@@ -192,7 +204,6 @@ NVMe 功能正常并且开启了TRIM.
   
 ## 鸣谢
 
-- [@mendax1234](https://github.com/mendax1234/) for [ThinkpadX390-Opencore-EFI](https://github.com/mendax1234/ThinkpadX390-Opencore-EFI/)
 - [Apple](https://www.apple.com) for [macOS](https://www.apple.com/macos)
 - [@zxystd](https://github.com/zxystd) for developing [itlwm](https://github.com/OpenIntelWireless/itlwm)
 - [@Acidanthera](https://github.com/acidanthera) for basic kexts.
