@@ -1,4 +1,4 @@
-# OpenCore For X390 4G LTE OC 0.8.0
+# OpenCore X390 4G LTE For OC 0.8.0
 
 <div align="center">
 <img src="https://img14.360buyimg.com/n0/jfs/t1/122699/10/10858/75075/5f4708e1Eb80b55c6/f276218d450b6840.jpg" width="350px">
@@ -11,6 +11,7 @@
 - [介绍](#介绍)
 - [下载](#下载)
 - [声明](#声明)
+- [OpenCore版本](#opencore版本)
 - [ThinkPad X390 Hackintosh](#ThinkPadX390_4GLTE-OpenCore-Hackintosh)
   - [测试过的系统](#测试过的系统)
 - [设备](#设备)
@@ -46,6 +47,10 @@ git clone <https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git>
 ## 声明
 
 你的保修单现在无效了。如果你有任何顾虑，请在我的 EFI 取代你的 EFl 之前做一些研究。我不负责任何损失，包括但不限于内核恐慌，设备无法启动或不能正常工作，存储损坏或数据丢失，原子弹爆炸，第三次世界大战，谷歌和苹果都倒闭，等等
+
+## OpenCore版本
+
+OpenCore 0.8.0
 
 ## ThinkPadX390_4GLTE-OpenCore-Hackintosh
 
