@@ -53,7 +53,7 @@ git clone <https://github.com/abctel/ThinkPadX390_4GLTE-OpenCore.git>
 
 OpenCore 0.8.0
 
-## ThinkPadX390_4GLTE-OpenCore-Hackintosh
+## ThinkPadX390 4G LTE OpenCore Hackintosh
 
 可以完美地在ThinkPad X390上安装*Catalina/Big Sur*或者任何之前的版本，如*Mojave , High Sierra , Sierra , EI Captain , Yosemite , Mavericks ……*
 
